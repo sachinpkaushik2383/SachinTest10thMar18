@@ -15,6 +15,7 @@ class DefaultController extends Controller
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(
+		    'title' => 'Welcome!',
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ));
     }
@@ -24,13 +25,23 @@ class DefaultController extends Controller
      */
     public function listAction(Request $request)
     {
-		$client = new \Github\Client();		
-		$repositories = $client->api('user')->repositories('symfony');
+		try {
+			$client = new \Github\Client();		
+			$repositories = $client->api('user')->repositories('symfony');
 
-        // replace this example code with whatever you need
-        return $this->render('default/list.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-			'repositories' => $repositories
-        ));
+			// replace this example code with whatever you need
+			return $this->render('default/list.html.twig', array(
+				'title' => 'List of GitHub Symfony Repositories',
+				'repositories' => $repositories,
+				'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR
+			));
+		
+		} catch(\Exception $ex) {
+			return $this->render('default/list-error.html.twig', array(
+			    'title' => $ex->getMessage(),
+			    'exception' => $ex->getMessage(),
+				'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR
+			));
+		}	
     }
 }
