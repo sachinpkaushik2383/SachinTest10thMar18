@@ -1,3 +1,4 @@
+
 # List Symfony Repositories in Github
 Project url: https://github.com/sachinpkaushik2383/SachinTest10thMar18
 
@@ -36,5 +37,16 @@ http://cs.sensiolabs.org/
 
 **Format the code**
 > php php-cs-fixer.phar fix C:\xampp\htdocs\sachinTest --rules=-full_opening_tag,-indentation_type
+
+
+## Steps to run application
+
+- Use Symfony to host the application in your workstation environement 
+
+> $ php app/console server:run
+
+- Open the below url in your web browser to view the listings page
+
+> http://127.0.0.1:8000/list-symfony-github-repos
 
 ```
